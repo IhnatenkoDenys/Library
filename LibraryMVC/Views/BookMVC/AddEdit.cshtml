@@ -1,0 +1,47 @@
+﻿@model LibraryMVC.ViewModels.ResponseViewModels.BookMVCCreateUpdateViewModel
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Books</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>Add/Edit Book</h2>
+
+    <form name="bookForm">
+        <input type="hidden" name="id" id="idtxt" value="@Model.Id" />
+        <div class="form-group col-md">
+            <label for="Title">Title</label>
+            <input class="form-control" name="title" id="title" />
+        </div>
+        <div class="form-group col-md">
+            <label for="ReleaseDate">Release Date</label>
+            <input class="form-control" name="releaseDate" id="releaseDate" type="date" />
+        </div>
+        <div class="form-group col-md">
+            <label>Publisher</label>
+            @Html.DropDownList("publisherId", Model.Publishers, new { @class = "form-control" })
+        </div>
+        <div class="panel-body">
+            <button type="submit" id="save" name="save" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/addEditBook.js"></script>
+    <script>
+        $(document).ready(function () {
+            //var bookAddEditHandler = new BookAddEditHandler({ urlBooks: "@Url.Action("Books", "BookMvc")" });
+            var bookAddEditHandler = new BookAddEditHandler();
+            var idval = $("#idtxt").attr("value");
+            if (idval != 0) {
+                bookAddEditHandler.GetBook(idval);
+            }
+        });
+    </script>
+</body>
+</html>

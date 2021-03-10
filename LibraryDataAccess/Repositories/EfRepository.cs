@@ -19,12 +19,12 @@ namespace LibraryDataAccess.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
+        public async Task<int> AddAsync(T entity, CancellationToken cancellationToken = default)
         {
             await _dbContext.Set<T>().AddAsync(entity);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return entity;
+            return entity.Id;
         }
 
         public async Task DeleteAsync(T entity, CancellationToken cancellationToken = default)
@@ -39,12 +39,12 @@ namespace LibraryDataAccess.Repositories
             return await _dbContext.Set<T>().FindAsync(keyValues, cancellationToken);
         }
 
-        public virtual async Task<IReadOnlyList<T>> ListAllAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<List<T>> ListAllAsync(CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public virtual async Task<IReadOnlyList<T>> ListAllAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
+        public virtual async Task<List<T>> ListAllAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<T>().Where(predicate).ToListAsync();
         }

@@ -1,0 +1,10 @@
+﻿.buttonBook button {
+    float: right;
+    margin: 10px;
+    width: 80px;
+}
+
+h2 {
+    text-align: center;
+    padding: 20px;
+}

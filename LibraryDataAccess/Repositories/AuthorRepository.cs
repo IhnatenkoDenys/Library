@@ -21,12 +21,12 @@ namespace LibraryDataAccess.Repositories
             return await _dbContext.Set<Author>().Include(x => x.Country).FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
-        public override async Task<IReadOnlyList<Author>> ListAllAsync(CancellationToken cancellationToken = default)
+        public override async Task<List<Author>> ListAllAsync(CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<Author>().Include(x => x.Country).ToListAsync(cancellationToken);
         }
 
-        public override async Task<IReadOnlyList<Author>> ListAllAsync(Expression<Func<Author, bool>> predicate, CancellationToken cancellationToken = default)
+        public override async Task<List<Author>> ListAllAsync(Expression<Func<Author, bool>> predicate, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<Author>().Include(x => x.Country).Where(predicate).ToListAsync(cancellationToken);
         }

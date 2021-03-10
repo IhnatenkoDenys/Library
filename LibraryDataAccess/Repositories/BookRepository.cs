@@ -24,7 +24,7 @@ namespace LibraryDataAccess.Repositories
                                    .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
-        public override async Task<IReadOnlyList<Book>> ListAllAsync(CancellationToken cancellationToken = default)
+        public override async Task<List<Book>> ListAllAsync(CancellationToken cancellationToken = default)
         {
             return await _dbContext.Books
                                    .Include(x => x.AuthorBooks)
@@ -33,7 +33,7 @@ namespace LibraryDataAccess.Repositories
                                    .ToListAsync(cancellationToken);
         }
 
-        public override async Task<IReadOnlyList<Book>> ListAllAsync(Expression<Func<Book, bool>> predicate, CancellationToken cancellationToken = default)
+        public override async Task<List<Book>> ListAllAsync(Expression<Func<Book, bool>> predicate, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Books
                                    .Include(x => x.AuthorBooks)
